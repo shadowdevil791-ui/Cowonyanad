@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.container {
+  max-width: 300px;
+  z-index: 2;
+}
+
+.step {
+  display: none;
+  animation: fadeScale 0.8s ease;
+}
+
+.step.active {
+  display: block;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ❤️ HATI JATUH */
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 20px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="step active">
+    <h2>Halo sayang ❤️</h2>
+    <p>Coba klik next ya 😊</p>
+    <button onclick="nextStep()">Next</button>
+  </div>
+
+  <div class="step">
+    <h2>Aku cuma mau bilang...</h2>
+    <button onclick="nextStep()">Next</button>
+  </div>
+
+  <div class="step">
+    <h2>Aku kangen kamu ❤️</h2>
+    <p>Banget 😊</p>
+    <button onclick="nextStep()">Next</button>
+  </div>
+
+  <!-- 🎯 ENDING SPESIAL -->
+  <div class="step">
+    <h2>Terakhir nih...</h2>
+    <button onclick="showFinal()">Klik ini 💖</button>
+  </div>
+
+  <div class="step" id="final">
+    <h1>PENGEN NGENTOTIN KAMU</h1>
+    <p>Sampe lemes 🥺</p>
+  </div>
+
+</div>
+
+<script>
+let current = 0;
+const steps = document.querySelectorAll(".step");
+
+function nextStep() {
+  steps[current].classList.remove("active");
+  current++;
+  if (current < steps.length) {
+    steps[current].classList.add("active");
+  }
+}
+
+// 💖 ENDING EFFECT
+function showFinal() {
+  steps[current].classList.remove("active");
+  document.getElementById("final").classList.add("active");
+}
+
+// ❤️ GENERATE HATI JATUH
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
